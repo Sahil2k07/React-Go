@@ -34,4 +34,11 @@ func MapControllers(e *echo.Echo) {
 
 		return c.String(http.StatusOK, randomMessage)
 	})
+
+	e.GET("/health", func(c echo.Context) error {
+		return c.JSON(http.StatusOK, map[string]any{
+			"success": true,
+			"message": "Server running healthy",
+		})
+	})
 }

@@ -20,11 +20,13 @@ COPY server/go.sum .
 RUN go mod tidy
 
 COPY server/. .
-RUN CGO_ENABLED=0 GOOS=linux go build -mod=mod -o /app/react-go .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod=mod -o react-go .
 
-FROM golang:1.24.7-alpine
+FROM alpine:3.20
 
 WORKDIR /app
+
+RUN apk add --no-cache curl
 
 COPY --from=fe-builder /app/dist/. ./public
 COPY --from=be-builder /app/. .

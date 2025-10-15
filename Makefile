@@ -18,13 +18,13 @@ frontend:
 
 backend:
 	mkdir -p $(BUILD_DIR)
-	cd $(BACKEND_DIR) && go build -o ../$(GO_BIN)
+	cd $(BACKEND_DIR) && GOOS=linux GOARCH=amd64 go build -o ../$(GO_BIN)
 
 zip:
 	@echo "Copying Procfile into build/ ..."
 	cp $(PROCFILE) $(BUILD_DIR)/
-	@echo "Creating zip of build/* ..."
-	zip -r $(ZIP_FILE) $(BUILD_DIR)/*
+	@echo "Creating zip of build/* at root ..."
+	cd $(BUILD_DIR) && zip -r ../$(ZIP_FILE) ./*
 	@echo "Zip created at $(ZIP_FILE)"
 
 run:

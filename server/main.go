@@ -3,16 +3,14 @@ package main
 import (
 	"net/http"
 
-	"github.com/Sahil2k07/React-Go/configs"
 	"github.com/Sahil2k07/React-Go/controllers"
-	"github.com/Sahil2k07/React-Go/models"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 )
 
 func init() {
-	configs.Connect()
-	configs.DB.AutoMigrate(&models.Message{})
+	// configs.Connect()
+	// configs.DB.AutoMigrate(&models.Message{})
 }
 
 func main() {

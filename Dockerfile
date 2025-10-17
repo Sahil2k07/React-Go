@@ -1,6 +1,8 @@
-FROM oven/bun:alpine AS fe-builder
+FROM oven/bun:latest AS fe-builder
 
 WORKDIR /app
+
+ENV ESBUILD_BINARY_PATH=/usr/bin/node
 
 COPY client/package.json .
 
@@ -10,7 +12,7 @@ COPY client/. .
 
 RUN bun run build
 
-FROM golang:1.24.7-trixie AS be-builder
+FROM golang:1.25.3-alpine3.22 AS be-builder
 
 WORKDIR /app
 
